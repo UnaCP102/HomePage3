@@ -6,4 +6,5 @@
     <color name="dark_blue">#4aa1ff</color>
     <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
+    <color name="colorGray">#23b7b7b7</color>
 </resources>

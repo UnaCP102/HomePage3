@@ -1,5 +1,6 @@
 package unalee.homepage3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,7 +12,7 @@ import android.view.MenuItem;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    boolean login = false;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
@@ -32,10 +33,11 @@ public class MainActivity extends AppCompatActivity {
                     setTitle(R.string.textDate);
                     return true;
                 case R.id.item_Profile:
-                    fragment = new ProfileFragment();
-                    changeFragment(fragment);
-                    setTitle(R.string.textProfile);
-                    return true;
+                        fragment = new ProfileFragment();
+                        changeFragment(fragment);
+                        setTitle(R.string.textProfile);
+                        return true;
+
                 case R.id.item_HomePage:
                     fragment = new HomePageFragment();
                     changeFragment(fragment);

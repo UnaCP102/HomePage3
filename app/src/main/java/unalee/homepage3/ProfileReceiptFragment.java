@@ -22,14 +22,14 @@ public class ProfileReceiptFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_profile_receipt, container, false);
-        List<ProfileReceiptDetail> newsList = new ArrayList<>();
-        newsList.add(new ProfileReceiptDetail("Title 1", "Detail 1"));
-        newsList.add(new ProfileReceiptDetail("Title 2", "Detail 2"));
-        newsList.add(new ProfileReceiptDetail("Title 3", "Detail 3"));
+        List<ProfileReceiptDetail> receiptList = new ArrayList<>();
+        receiptList.add(new ProfileReceiptDetail("Title 1", "Detail 1"));
+        receiptList.add(new ProfileReceiptDetail("Title 2", "Detail 2"));
+        receiptList.add(new ProfileReceiptDetail("Title 3", "Detail 3"));
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new ReceiptAdapter(inflater, newsList));
+        recyclerView.setAdapter(new ReceiptAdapter(inflater, receiptList));
         return view;
     }
 
