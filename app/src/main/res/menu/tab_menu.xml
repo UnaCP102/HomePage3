@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_HomePage"
+        android:icon="@drawable/homepage"
+        android:title="@string/textHomePage" />
+    <item
+        android:id="@+id/item_Date"
+        android:icon="@drawable/calendar64"
+        android:title="@string/textDate" />
+
+    <item
+        android:id="@+id/item_Reserved"
+        android:icon="@drawable/reserved64"
+        android:title="@string/textReserved" />
+
+    <item
+        android:id="@+id/item_Profile"
+        android:icon="@drawable/profile64"
+        android:title="@string/textProfile" />
+
+</menu>

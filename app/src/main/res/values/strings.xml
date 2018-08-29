@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">HomePage3</string>
+    <string name="txName">Name</string>
+    <string name="txMemberNumber">12345678</string>
+    <string name="txNews">Hotel News</string>
+    <string name="txReserved">Reserved Information</string>
+    <string name="txMyProfile">My Profile</string>
+    <string name="tx123456">123,456</string>
+    <string name="txMemberNb">Member NO.</string>
+    <string name="txMemberName">Mr. Huang</string>
+    <string name="txMemberEmail">Email:</string>
+    <string name="txMemberemail">xxx@hotmail.com</string>
+    <string name="btComment">Comment</string>
+    <string name="btReceip">Receipt</string>
+    <string name="btReception">Reception</string>
+    <string name="btSetting">Setting</string>
+    <string name="textReserved">Reserved</string>
+    <string name="textDate">Date</string>
+    <string name="textProfile">Profile</string>
+    <string name="textHomePage">Home</string>
+    <string name="txWelcome">Welcome</string>
+    <string name="textEmail">Email or Account</string>
+    <string name="textPassword">Password</string>
+    <string name="textJoin">Join</string>
+    <string name="textLogIn">Log In</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HomePage3</string>
+    <string name="txName">姓名</string>
+    <string name="txMemberNumber">12345678</string>
+    <string name="txNews">最新資訊</string>
+    <string name="txReserved">預約資訊</string>
+    <string name="txMyProfile">會員</string>
+    <string name="tx123456">123,456</string>
+    <string name="txMemberNb">會員號碼</string>
+    <string name="txMemberName">黃先生</string>
+    <string name="txMemberEmail">Email:</string>
+    <string name="txMemberemail">xxx@hotmail.com</string>
+    <string name="btComment">評論</string>
+    <string name="btReceip">明細</string>
+    <string name="btReception">聯絡櫃檯</string>
+    <string name="btSetting">資料修改</string>
+    <string name="textReserved">預約</string>
+    <string name="textDate">住房日期</string>
+    <string name="textProfile">會員資訊</string>
+    <string name="textHomePage">首頁</string>
+</resources>
