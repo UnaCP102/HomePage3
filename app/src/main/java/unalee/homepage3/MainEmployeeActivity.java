@@ -36,11 +36,6 @@ public class MainEmployeeActivity extends AppCompatActivity {
                     setTitle("員工資訊");
                     return true;
 
-                case R.id.item_HomePage:
-                    fragment = new HomePageFragment();
-                    changeFragment(fragment);
-                    setTitle("首頁");
-                    return true;
             }
             return false;
         }
@@ -50,9 +45,9 @@ public class MainEmployeeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_employee);
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigationEmployee);
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         initContent();
@@ -60,16 +55,16 @@ public class MainEmployeeActivity extends AppCompatActivity {
     }
 
     private void initContent() {
-        Fragment fragment = new HomePageFragment();
+        Fragment fragment = new EmployeePageFragment();
         changeFragment(fragment);
-        setTitle(R.string.textHomePage);
+        setTitle("員工資訊");
     }
 
     private void changeFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content, fragment);
+        fragmentTransaction.replace(R.id.contentEmployee, fragment);
         fragmentTransaction.commit();
     }
 
