@@ -43,4 +43,10 @@
         android:text="@string/txReserved"
         android:textSize="20sp" />
 
+    <Button
+        android:id="@+id/btToEmployee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="員工專區"/>
+
 </LinearLayout>

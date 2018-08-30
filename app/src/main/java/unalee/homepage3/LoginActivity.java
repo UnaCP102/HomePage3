@@ -43,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View view) {
             String uid = etEmail.getText().toString();
             String pw = etPassword.getText().toString();
-            Log.e("Button", "onClick");
             if (uid.equals("xxx") && pw.equals("1234")){
                 Toast.makeText(context, "登入成功", Toast.LENGTH_SHORT).show();
                 finish();

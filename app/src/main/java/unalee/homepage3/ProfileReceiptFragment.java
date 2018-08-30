@@ -23,9 +23,12 @@ public class ProfileReceiptFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_profile_receipt, container, false);
         List<ProfileReceiptDetail> receiptList = new ArrayList<>();
-        receiptList.add(new ProfileReceiptDetail("Title 1", "Detail 1"));
-        receiptList.add(new ProfileReceiptDetail("Title 2", "Detail 2"));
-        receiptList.add(new ProfileReceiptDetail("Title 3", "Detail 3"));
+        receiptList.add(new ProfileReceiptDetail
+                ("訂單編號0000003", "消費日期：2018-01-01 \n 消費金額：50,000"));
+        receiptList.add(new ProfileReceiptDetail
+                ("訂單編號0000002", "消費日期：2018-05-03 \n 消費金額：32,000"));
+        receiptList.add(new ProfileReceiptDetail
+                ("訂單編號0000001", "消費日期：2018-07-08 \n 消費金額：46,000"));
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -40,7 +40,7 @@ public class ProfileCommentFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         btCommentCancel = (Button) getActivity().findViewById(R.id.btCommentCancel);
-//        btCommentOK = (Button) getActivity().findViewById(R.id.btCommentOK);
+        btCommentOK = (Button) getActivity().findViewById(R.id.btCommentOK);
         etCommentText = (EditText) getActivity().findViewById(R.id.etCommentText);
         ratingBar = (RatingBar) getActivity().findViewById(R.id.ratingBar);
         ratingBar.setOnRatingBarChangeListener(ratingBarOnRatingBarChange);
@@ -49,32 +49,25 @@ public class ProfileCommentFragment extends Fragment {
             @Override
             public void onClick (View view){
                 etCommentText.setText("");
-                Toast.makeText(getActivity(), "取消", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "取消", Toast.LENGTH_SHORT).show();
             }
 
         });
 
-//        btCommentOK.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick (View view){
-//                String text = etCommentText.getText().toString();
-//                Integer intent = new (getActivity(), ResultCommentAcitvity.class)
-//                Bundle bundle = new Bundle();
-//                Comment comment = new Comment(ratingBar, etCommentText);
-//                bundle.putSerializable("Comment", comment);
-//                intent.putExtras(bundle);
-//                startActivity(intent);
-//
-//
-//            }
-//        });
+        btCommentOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                Toast.makeText(getActivity(), "評論已送出，感謝您的支持。", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
     }
     public RatingBar.OnRatingBarChangeListener ratingBarOnRatingBarChange
             = new RatingBar.OnRatingBarChangeListener()  {
         @Override
         public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-            Toast.makeText(getActivity(), "rating: " + rating, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "rating: " + rating, Toast.LENGTH_SHORT).show();
         }
 
     };
