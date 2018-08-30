@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_HomePage"
+        android:icon="@drawable/homepage"
+        android:title="首頁" />
+    <item
+        android:id="@+id/item_DayList"
+        android:icon="@drawable/calendar64"
+        android:title="日報表" />
+
+    <item
+        android:id="@+id/item_Instantly"
+        android:icon="@drawable/reserved64"
+        android:title="即時服務" />
+
+    <item
+        android:id="@+id/item_EmployeePage"
+        android:icon="@drawable/profile64"
+        android:title="員工資訊" />
+
+</menu>

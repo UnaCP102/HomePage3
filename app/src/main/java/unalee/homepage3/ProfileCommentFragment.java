@@ -48,6 +48,7 @@ public class ProfileCommentFragment extends Fragment {
         btCommentCancel.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View view){
+                ratingBar.setRating(0);
                 etCommentText.setText("");
                 Toast.makeText(getActivity(), "取消", Toast.LENGTH_SHORT).show();
             }
