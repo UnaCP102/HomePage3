@@ -9,6 +9,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import unalee.homepage3.EmployeeFragment.EmployeeDayListFragment;
+import unalee.homepage3.EmployeeFragment.EmployeeInstantlyServiceFragment;
+import unalee.homepage3.EmployeeFragment.EmployeePageFragment;
+
 public class MainEmployeeActivity extends AppCompatActivity {
     boolean login = false;
 

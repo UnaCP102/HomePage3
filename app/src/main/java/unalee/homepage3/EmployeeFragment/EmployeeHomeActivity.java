@@ -1,4 +1,4 @@
-package unalee.homepage3;
+package unalee.homepage3.EmployeeFragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import unalee.homepage3.R;
 
 public class EmployeeHomeActivity extends AppCompatActivity {
     private Window window;

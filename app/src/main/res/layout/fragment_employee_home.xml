@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EmployeeHomeActivity"
+    tools:context=".EmployeeFragment.EmployeeHomeActivity"
     android:background="@drawable/employee_home">
 
     <LinearLayout

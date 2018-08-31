@@ -1,10 +1,12 @@
-package unalee.homepage3;
+package unalee.homepage3.EmployeeFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import unalee.homepage3.R;
 
 public class EmployeeDayListFragment extends Fragment {
 
