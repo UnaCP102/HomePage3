@@ -56,7 +56,8 @@ public class ProfileInformationFragment extends Fragment {
         });
     }
 
-    @Override
+
+        @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == RESULT_OK) {
             int newSize = 512;

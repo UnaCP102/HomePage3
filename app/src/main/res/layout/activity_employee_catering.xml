@@ -127,25 +127,21 @@
         <Button
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:drawableTop="@drawable/check_in_64"/>
+            android:layout_marginLeft="40dp"
+            android:drawableTop="@drawable/letter_d64"/>
+
 
         <Button
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:drawableTop="@drawable/check_out_64"/>
-
-        <Button
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="50dp"
             android:drawableTop="@drawable/service64"/>
 
         <Button
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_gravity="right"
             android:drawableTop="@drawable/homepage"/>
 
 

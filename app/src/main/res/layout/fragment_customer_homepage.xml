@@ -49,4 +49,10 @@
         android:layout_height="wrap_content"
         android:text="員工專區"/>
 
+    <Button
+        android:id="@+id/btToJoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="加入會員"/>
+
 </LinearLayout>

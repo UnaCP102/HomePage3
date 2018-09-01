@@ -46,18 +46,19 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:orientation="vertical"
             android:paddingTop="40dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/employee_pic"/>
+                android:layout_width="113dp"
+                android:layout_height="113dp"
+                android:src="@drawable/employee_pic"
+                />
 
-        </LinearLayout>
+        </FrameLayout>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -146,6 +147,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginLeft="20dp"
+            android:layout_gravity="right"
             android:drawableTop="@drawable/homepage"/>
 
 
