@@ -31,7 +31,7 @@ public class HomePageFragment extends Fragment {
         btToEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),MainEmployeeActivity.class);
+                Intent intent = new Intent(getActivity(),EmployeeHomeActivity.class);
                 startActivity(intent);
             }
         });

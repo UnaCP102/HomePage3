@@ -1,4 +1,4 @@
-package unalee.homepage3.EmployeeFragment;
+package unalee.homepage3;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,8 +10,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import unalee.homepage3.R;
 
 public class EmployeeHomeActivity extends AppCompatActivity {
     private Window window;
@@ -31,10 +29,8 @@ public class EmployeeHomeActivity extends AppCompatActivity {
     }
 
     private void initialization() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
         employHomeBottom = findViewById(R.id.employHomeBottom);
-        employHomeBottom.setPadding(5, 5, 5,5);
+        employHomeBottom.setPadding(5, 5, 5, 5);
     }
 
     /**
@@ -44,6 +40,7 @@ public class EmployeeHomeActivity extends AppCompatActivity {
         // 這裡要判斷部門的種類 用switch case
 
         // 設定按鈕尺寸/Margin
+
         LinearLayoutCompat.LayoutParams param = new LinearLayoutCompat.LayoutParams(240, 240);
         param.leftMargin = 20;
 

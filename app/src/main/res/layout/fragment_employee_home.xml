@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EmployeeFragment.EmployeeHomeActivity"
+    tools:context=".EmployeeHomeActivity"
     android:background="@drawable/employee_home">
 
     <LinearLayout
@@ -58,10 +58,6 @@
                 android:src="@drawable/employee_pic"/>
 
         </LinearLayout>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/settings32"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -119,34 +115,11 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lloutEmployee"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:orientation="horizontal"
         android:paddingTop="20dp">
-
-        <Button
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:drawableTop="@drawable/check_in_64"/>
-
-        <Button
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:drawableTop="@drawable/check_out_64"/>
-
-        <Button
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:drawableTop="@drawable/service64"/>
-
-        <Button
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:drawableTop="@drawable/homepage"/>
 
 
     </LinearLayout>
