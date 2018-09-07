@@ -7,16 +7,24 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Common {
     public static final int REQ_EXTERNAL_STORAGE = 0;
+    public final static String URL = "http://10.0.2.2:8080/ImageToJson_Login_Web";
+    public final static String PREF_FILE = "preference";
     private static final String TAG = "Common";
+
+    public static byte[] bitmapToPNG(Bitmap srcBitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        srcBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
 
     public static Bitmap downSize(Bitmap srcBitmap, int newSize) {
         if (newSize <= 20) {
-            // 如果欲縮小的尺寸過小，就直接定為128
             newSize = 512;
         }
         int srcWidth = srcBitmap.getWidth();

@@ -1,4 +1,4 @@
-package unalee.homepage3.ProfileFragment;
+package unalee.homepage3;
 
 import android.Manifest;
 import android.content.Intent;
@@ -17,8 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import unalee.homepage3.Common;
-import unalee.homepage3.R;
+
 
 
 public class ProfileInformationFragment extends Fragment {

@@ -9,8 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import unalee.homepage3.Activity.DateFragment;
-import unalee.homepage3.ProfileFragment.ProfileFragment;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                     setTitle(R.string.textReserved);
                     return true;
                 case R.id.item_Date:
-                    fragment = new DateFragment();
+                    fragment = new BookingFragment();
                     changeFragment(fragment);
                     setTitle(R.string.textDate);
                     return true;
