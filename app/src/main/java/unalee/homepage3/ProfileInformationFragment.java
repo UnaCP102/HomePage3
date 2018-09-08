@@ -1,7 +1,10 @@
 package unalee.homepage3;
 
 import android.Manifest;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -16,14 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
-
+import com.github.clans.fab.FloatingActionButton;
 
 
 public class ProfileInformationFragment extends Fragment {
     private static final int RESULT_OK = -1;
     private ImageView imageView;
     private ImageButton ibChange;
+    private FloatingActionButton fabSetting, fabLogOut;
     private static final int REQUEST_TAKE_PICTURE_SMALL = 0;
     private static final int REQUEST_PICK_PICTURE = 1;
 
@@ -40,9 +43,11 @@ public class ProfileInformationFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         imageView = getActivity().findViewById(R.id.ivProfilePicture);
         ibChange = getActivity().findViewById(R.id.ibChange);
-
+        fabLogOut = getActivity().findViewById(R.id.fabLogOut);
+        fabSetting = getActivity().findViewById(R.id.fabSetting);
 
         ibChange.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,9 +58,24 @@ public class ProfileInformationFragment extends Fragment {
                 ibChange.bringToFront(); //把相機那張圖一直放在最上面
             }
         });
+
+        fabLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences pref = getActivity().getSharedPreferences(Common.PREF_FILE,
+                        Context.MODE_PRIVATE);
+                pref.edit().putBoolean("login", false).apply();
+                view.setVisibility(View.GONE);
+            }
+        });
     }
 
 
+
+
+
+
+    //以下為選照片method
         @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == RESULT_OK) {

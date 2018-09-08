@@ -1,11 +1,15 @@
 package unalee.homepage3;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashSet;
@@ -61,5 +65,20 @@ public class Common {
                     permissionsRequest.toArray(new String[permissionsRequest.size()]),
                     requestCode);
         }
+    }
+
+    public static boolean networkConnected(Activity activity) {
+        ConnectivityManager conManager =
+                (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = conManager != null ? conManager.getActiveNetworkInfo() : null;
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
+    public static void showToast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showToast(Context context, int messageResId) {
+        Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
     }
 }

@@ -23,6 +23,13 @@
     <string name="textPassword">Password</string>
     <string name="textJoin">Join</string>
     <string name="textLogIn">Log In</string>
+    <string name="textMyProfile">Profile</string>
+    <string name="MyProfileSetting">My Profile Setting</string>
+    <string name="msg_NameIsInvalid">Name is invalid</string>
+    <string name="msa_PasswordNoRight">Password Is Not Right</string>
+    <string name="msg_InsertFail">Insert fail</string>
+    <string name="msg_InsertSuccess">Insert Success</string>
+    <string name="msg_NoNetwork">no network connection available</string>
 
     <array name="home_video_tab">
     <item>全部@dream@0</item>

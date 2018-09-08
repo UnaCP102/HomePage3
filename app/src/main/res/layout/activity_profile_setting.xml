@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/txJoinMyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity=""
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/MyProfileSetting"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/txProfileSettingName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity=""
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"
+            android:text="姓名"
+            android:drawableLeft="@drawable/person24"
+            android:textSize="20sp"
+            android:drawablePadding="30dp"/>
+
+        <TextView
+            android:id="@+id/txProfileSettingEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity=""
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="xxx@gmail.com"
+            android:drawableLeft="@drawable/email24"
+            android:textSize="20sp"
+            android:drawablePadding="30dp"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/etProfileSettingPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="密碼"
+                android:inputType="textPassword"
+                android:drawableLeft="@drawable/key24"
+                android:drawablePadding="30dp"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/etProfileSettingReenterPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="再次確認密碼"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txProfileSettingBDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity=""
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="2000-10-10"
+            android:drawableLeft="@drawable/cake24"
+            android:textSize="20sp"
+            android:drawablePadding="30dp"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/etProfileSettingPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="phone"
+                android:hint="手機"
+                android:drawableLeft="@drawable/phone24"
+                android:drawablePadding="30dp"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/etProfileSettingAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="地址"
+                android:drawableLeft="@drawable/location24"
+                android:drawablePadding="30dp"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp">
+
+
+            <Button
+                android:id="@+id/btProfileSettingCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                android:drawableRight="@drawable/close24"
+                android:background="@color/colorGray"/>
+
+            <Button
+                android:id="@+id/btProfileSettingCecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="確認"
+                android:drawableRight="@drawable/checked24"
+                android:background="@color/colorGray"/>
+        </LinearLayout>
+</LinearLayout>

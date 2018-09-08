@@ -5,50 +5,92 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.util.Calendar;
 
+
 public class JoinActivity extends AppCompatActivity implements DatePicker.OnDateChangedListener, View.OnClickListener {
+    private static final String TAG = "JoinActivity";
     private int year, month, day;
     private LinearLayout llDate;
     private TextView tvDate;
     private StringBuffer date;
     private Context context;
     private Button btJoinCecked, btJoinCancel;
+    private EditText etJoinName, etJoinEmail, etJoinPassword, etJoinReenterPassword, etJoinPhone, etJoinAddress;
+    private RadioButton rbgender;
+    private RadioGroup rgGroup;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_join);
+
 
         context = this;
         date = new StringBuffer();
         handleView();
         initDateTime();
-
-
-    }
-
-
-
-    private void handleView() {
-        llDate = (LinearLayout) findViewById(R.id.llDate);
-        tvDate = (TextView) findViewById(R.id.tvDate);
-        btJoinCancel = (Button) findViewById(R.id.btJoinCancel);
-        btJoinCecked = (Button) findViewById(R.id.btJoinCecked);
         llDate.setOnClickListener(this);
 
         btJoinCecked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = etJoinName.getText().toString().trim();
+                if (name.length() <= 0) {
+                    Common.showToast(context, R.string.msg_NameIsInvalid);
+                    return;
+                }
+                String email = etJoinEmail.getText().toString().trim();
+                String password = etJoinPassword.getText().toString();
+                String rePassword = etJoinReenterPassword.getText().toString();
+                if (password.equals(rePassword)){
+                    return;
+                }else {
+                    Common.showToast(context, R.string.msa_PasswordNoRight);
+                }
+                String gender = rbgender.getText().toString();
+                String birthDay = tvDate.getText().toString();
+                String phoneNo = etJoinPhone.getText().toString().trim();
+                String address = etJoinAddress.getText().toString().trim();
 
+                if (Common.networkConnected(JoinActivity.this)){
+                    String url = Common.URL + "/CustomerServlet";
+                    Customer customer = new Customer(0, name, phoneNo, password, gender,
+                            birthDay, phoneNo, address);
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("action", "customerInsert");
+                    jsonObject.addProperty("customer", new Gson().toJson(customer));
+                    int count = 0;
+                    try {
+                        String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                        count = Integer.valueOf(result);
+                    }catch (Exception e){
+                        Log.e(TAG, e.toString());
+                    }
+                    if (count == 0){
+                        Common.showToast(context, R.string.msg_InsertFail);
+                    }else {
+                        Common.showToast(context, R.string.msg_InsertSuccess);
+                    }
+                }else{
+                    Common.showToast(context, R.string.msg_NoNetwork);
+                }
+                finish();
             }
         });
 
@@ -74,10 +116,34 @@ public class JoinActivity extends AppCompatActivity implements DatePicker.OnDate
                         .show();
             }
         });
+
+        btJoinCecked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+    }
+
+    private void handleView() {
+        llDate = (LinearLayout) findViewById(R.id.llDate);
+        tvDate = (TextView) findViewById(R.id.tvDate);
+        btJoinCancel = (Button) findViewById(R.id.btJoinCancel);
+        btJoinCecked = (Button) findViewById(R.id.btJoinCecked);
+        etJoinName = (EditText) findViewById(R.id.etJoinName);
+        etJoinEmail = (EditText) findViewById(R.id.etJoinEmail);
+        etJoinPassword = (EditText) findViewById(R.id.etJoinPassword);
+        etJoinReenterPassword = (EditText) findViewById(R.id.etJoinReenterPassword);
+        etJoinPhone = (EditText) findViewById(R.id.etJoinPhone);
+        etJoinAddress = (EditText) findViewById(R.id.etJoinAddress);
+        rbgender = (RadioButton) findViewById(rgGroup.getCheckedRadioButtonId());
+        rgGroup = (RadioGroup) findViewById(R.id.rgGender);
+
     }
 
 
-
+    //以下為生日日期選單
     private void initDateTime() {
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
