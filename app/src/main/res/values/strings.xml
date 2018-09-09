@@ -30,6 +30,8 @@
     <string name="msg_InsertFail">Insert fail</string>
     <string name="msg_InsertSuccess">Insert Success</string>
     <string name="msg_NoNetwork">no network connection available</string>
+    <string name="msg_SentComment">Sent Comment</string>
+    <string name="msg_NoCommentsFound">No comments found</string>
 
     <array name="home_video_tab">
     <item>全部@dream@0</item>

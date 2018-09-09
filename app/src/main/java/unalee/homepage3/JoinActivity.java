@@ -70,7 +70,7 @@ public class JoinActivity extends AppCompatActivity implements DatePicker.OnDate
 
                 if (Common.networkConnected(JoinActivity.this)){
                     String url = Common.URL + "/CustomerServlet";
-                    Customer customer = new Customer(0, name, phoneNo, password, gender,
+                    Customer customer = new Customer(0, name, email, password, gender,
                             birthDay, phoneNo, address);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "customerInsert");
@@ -137,8 +137,9 @@ public class JoinActivity extends AppCompatActivity implements DatePicker.OnDate
         etJoinReenterPassword = (EditText) findViewById(R.id.etJoinReenterPassword);
         etJoinPhone = (EditText) findViewById(R.id.etJoinPhone);
         etJoinAddress = (EditText) findViewById(R.id.etJoinAddress);
-        rbgender = (RadioButton) findViewById(rgGroup.getCheckedRadioButtonId());
         rgGroup = (RadioGroup) findViewById(R.id.rgGender);
+        rbgender = (RadioButton) findViewById(rgGroup.getCheckedRadioButtonId());
+
 
     }
 

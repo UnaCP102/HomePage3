@@ -29,6 +29,8 @@
 
 
 
+
+        <activity android:name=".CommentActivity" />
         <activity android:name=".EmployeeHomeActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainEmployeeActivity" />

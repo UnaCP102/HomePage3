@@ -1,54 +1,39 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".MainActivity">
+    android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/tvText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="整體評分"
-        android:textSize="20sp" />
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:stepSize="0.5" />
-
-    <EditText
-        android:id="@+id/etCommentText"
+    <!--下拉更新的UI-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="390dp"
-        android:padding="5dp"
-        android:minLines="5"
-        android:gravity="top"
-        android:background="@drawable/order_edt_note_bg"/>
+        android:layout_height="match_parent">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btCommentCancel"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btCommentAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="取消"/>
-
-        <Button
-            android:id="@+id/btCommentOK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="送出"/>
-    </LinearLayout>
-
-
-
-
-</LinearLayout>
+            android:layout_gravity="bottom|end"
+            android:layout_margin="24dp"
+            android:src="@drawable/ic_add"
+            app:elevation="6dp"
+            app:rippleColor="#FFFFFF" />
+    </android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

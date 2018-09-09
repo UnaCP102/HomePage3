@@ -10,6 +10,7 @@ public class Customer implements Serializable{
     private String name, email, password="", phone, birthday, address, gender;
     private int discount;
     private Blob customerPic;
+    public int customerId;
 
     public Customer (int customerID, String name, String email, String password, String gender,
                      String birthday, String phone, String address){
