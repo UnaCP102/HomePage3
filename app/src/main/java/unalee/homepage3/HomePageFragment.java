@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class HomePageFragment extends Fragment {
-    private Button btToEmployee, btToJoin;
+    public static final int FUNC_LOGIN = 1;
+    private Button btToEmployee, btToJoin, btToLogIn;
     private HomePageFragment context;
+    private Intent intent;
 
 
     @Override
@@ -26,6 +28,7 @@ public class HomePageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         btToEmployee = (Button) getActivity().findViewById(R.id.btToEmployee);
         btToJoin = (Button) getActivity().findViewById(R.id.btToJoin);
+        btToLogIn = (Button) getActivity().findViewById(R.id.btToLogIn);
         context = HomePageFragment.this;
 
         btToEmployee.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +44,14 @@ public class HomePageFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), JoinActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btToLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivityForResult(intent, FUNC_LOGIN);
             }
         });
 

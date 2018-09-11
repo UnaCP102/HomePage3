@@ -1,8 +1,10 @@
 package unalee.homepage3;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -35,10 +37,15 @@ public class MainActivity extends AppCompatActivity {
                     setTitle(R.string.textDate);
                     return true;
                 case R.id.item_Profile:
+                    if (!login) {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivityForResult(intent, 1);
+                    } else {
                         fragment = new ProfileFragment();
                         changeFragment(fragment);
                         setTitle(R.string.textProfile);
-                        return true;
+                    }
+                    return true;
 
                 case R.id.item_HomePage:
                     fragment = new HomePageFragment();
@@ -61,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
 
         initContent();
 
+        String user = getIntent().getStringExtra("LOGIN_USERID");
+        String password = getIntent().getStringExtra("LOGIN_PASSWORD");
+
+
+
+
+
+
     }
 
 
@@ -79,7 +94,19 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK ){
+            if (requestCode == 1){
+//                String user = data.getStringExtra("LOGIN_USERID");
+//                String password = data.getStringExtra("LOGIN_PASSWORD");
+                ProfileInformationFragment profileInformationFragment = new ProfileInformationFragment();
+                changeFragment(profileInformationFragment);
+                // 建立並切換到profile fragment
+            }else {
+                finish();
+            }
+        }
+    }
 }

@@ -38,6 +38,7 @@ public class ProfileInformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_profile_information, container, false);
+
     }
 
     @Override
@@ -101,6 +102,7 @@ public class ProfileInformationFragment extends Fragment {
                             Bitmap downsizedImage = Common.downSize(srcImage, newSize);
                             imageView.setImageBitmap(downsizedImage);
                         }
+
                     }
                     break;
             }

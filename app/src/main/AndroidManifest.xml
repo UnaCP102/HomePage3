@@ -26,13 +26,16 @@
             android:name=".JoinActivity"
             android:parentActivityName=".LoginActivity" />
 
+        <activity
+            android:name=".LoginActivity"
+            android:parentActivityName=".MainActivity" />
+
 
 
 
 
         <activity android:name=".CommentActivity" />
         <activity android:name=".EmployeeHomeActivity" />
-        <activity android:name=".LoginActivity" />
         <activity android:name=".MainEmployeeActivity" />
 
 

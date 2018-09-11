@@ -55,4 +55,10 @@
         android:layout_height="wrap_content"
         android:text="加入會員"/>
 
+    <Button
+        android:id="@+id/btToLogIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登入頁面"/>
+
 </LinearLayout>
