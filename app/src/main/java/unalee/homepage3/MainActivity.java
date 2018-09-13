@@ -101,11 +101,16 @@ public class MainActivity extends AppCompatActivity {
             if (requestCode == 1){
 //                String user = data.getStringExtra("LOGIN_USERID");
 //                String password = data.getStringExtra("LOGIN_PASSWORD");
-                ProfileInformationFragment profileInformationFragment = new ProfileInformationFragment();
-                changeFragment(profileInformationFragment);
+                ProfileFragment profileFragment = new ProfileFragment();
+                changeFragment(profileFragment);
                 // 建立並切換到profile fragment
             }else {
                 finish();
+            }
+
+            if (requestCode == 2){
+                ProfileFragment profileFragment = new ProfileFragment();
+                changeFragment(profileFragment);
             }
         }
     }

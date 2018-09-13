@@ -41,7 +41,7 @@ public class CommonTask extends AsyncTask<String, Integer, String> {
             connection.setRequestProperty("charset", "UTF-8");
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             bw.write(outStr);
-            Log.d(TAG, "output: " + outStr);
+            Log.e(TAG, "output: " + outStr);
             bw.close();
 
             int responseCode = connection.getResponseCode();

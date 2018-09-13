@@ -15,10 +15,10 @@ public class Comment implements Serializable{
         this.star = star;
     }
 
-    @Override
-    public boolean equals(Object obj){
-        return this.customerId == ((Customer) obj).customerId;
-    }
+//    @Override
+//    public boolean equals(Object obj){
+//        return this.customerId == ((Customer) obj).customerId;
+//    }
 
     public int getCustomerId(){
         return customerId;

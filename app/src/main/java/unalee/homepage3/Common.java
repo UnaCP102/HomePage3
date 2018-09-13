@@ -2,6 +2,7 @@ package unalee.homepage3;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
@@ -17,7 +18,7 @@ import java.util.Set;
 
 public class Common {
     public static final int REQ_EXTERNAL_STORAGE = 0;
-    public final static String URL = "http://10.0.2.2:8080/ImageToJson_Login_Web";
+    public final static String URL = "http://10.0.2.2:8080/ShellService";
     public final static String PREF_FILE = "preference";
     private static final String TAG = "Common";
 
@@ -81,4 +82,6 @@ public class Common {
     public static void showToast(Context context, int messageResId) {
         Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
     }
+
+
 }

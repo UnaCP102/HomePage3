@@ -63,7 +63,7 @@ public class CommentActivity extends AppCompatActivity{
                 String commentDetail = etCommentText.getText().toString();
 
                 if (Common.networkConnected(CommentActivity.this)){
-                    String url = Common.URL +  "/CommentServlet";
+                    String url = Common.URL +  "/CustomerServlet";
                     Comment comment = new Comment(0, "", star, commentDetail);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "commentInsert");

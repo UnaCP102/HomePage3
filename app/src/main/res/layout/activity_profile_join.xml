@@ -121,8 +121,8 @@
                 android:drawableLeft="@drawable/cake24"
                 android:drawablePadding="15dp"/>
 
-            <TextView
-                android:id="@+id/tvDate"
+            <Button
+                android:id="@+id/btDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
@@ -183,7 +183,7 @@
                 android:background="@color/colorGray"/>
 
             <Button
-                android:id="@+id/btJoinCecked"
+                android:id="@+id/btJoinChecked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
