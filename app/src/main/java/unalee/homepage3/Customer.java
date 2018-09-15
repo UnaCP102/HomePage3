@@ -7,13 +7,14 @@ import java.sql.Blob;
 public class Customer{
 
     int IdCustomer;
-    private String name, email, password, phone, birthday, address, gender, customerId;
+    private String name, email, password, birthday,phone,  address, gender, customerId;
 //    private int discount;
     private Blob customerPic;
 
 
     public Customer (int IdCustomer, String customerID, String name, String email, String password, String gender,
                      String birthday, String phone, String address, Blob customerPic){
+        this.IdCustomer = IdCustomer;
         this.customerId = customerID;
         this.name = name;
         this.email = email;
@@ -25,9 +26,35 @@ public class Customer{
         this.customerPic = customerPic;
     }
 
-    public Customer (int IdCustomer, String customerID, String name, String email, String password, String gender,
+    public Customer (int idCustomer, String customerID, String name, String email, String password, String gender,
                      String birthday, String phone, String address){
-        return;
+        this.IdCustomer = idCustomer;
+        this.customerId = customerID;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.phone = phone;
+        this.birthday = birthday;
+        this.address = address;
+    }
+
+    public Customer(String name, String email, String gender, String birthday, String phone, String address) {
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+        this.phone = phone;
+        this.birthday = birthday;
+        this.address = address;
+    }
+
+
+    public  Customer(int idCustomer, String password, String phone, String address){
+        this.IdCustomer = idCustomer;
+        this.password = password;
+        this.phone = phone;
+        this.address = address;
+
     }
 
     public int getIdCustomer(){

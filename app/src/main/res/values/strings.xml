@@ -33,6 +33,10 @@
     <string name="msg_SentComment">Sent Comment</string>
     <string name="msg_NoCommentsFound">No comments found</string>
     <string name="msg_NoProfileFound">No profile found</string>
+    <string name="msg_UpdateFail">Update Fail</string>
+    <string name="msg_UpdateSuccess">Update Success</string>
+    <string name="customer">Customer</string>
+    <string name="employee">Employee</string>
 
     <array name="home_video_tab">
     <item>全部@dream@0</item>

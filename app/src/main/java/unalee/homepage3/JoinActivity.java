@@ -44,6 +44,8 @@ public class JoinActivity extends AppCompatActivity {
     private EditText etJoinName, etJoinEmail, etJoinPassword, etJoinReenterPassword, etJoinPhone, etJoinAddress;
     private RadioButton rbgender;
     private RadioGroup rgGroup;
+    private boolean customerExist = false;
+    private CommonTask userExistTask, userRegisterTask;
 
 
     @Override
@@ -56,6 +58,38 @@ public class JoinActivity extends AppCompatActivity {
         date = new StringBuffer();
         handleView();
 
+        etJoinEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (Common.networkConnected(JoinActivity.this)) {
+                        String url = Common.URL + "/CustomerServlet";
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("action", "userExist");
+                        jsonObject.addProperty("email", etJoinEmail.getText().toString());
+                        String jsonOut = jsonObject.toString();
+                        userExistTask = new CommonTask(url, jsonOut);
+                        try {
+                            String result = userExistTask.execute().get();
+                            customerExist = Boolean.valueOf(result);
+                            Log.d(TAG, "" + customerExist);
+                            if(customerExist) {
+                                AlertDialog.Builder jump = new AlertDialog.Builder(context);
+                                jump.setTitle("SS Hotel");
+                                jump.setMessage("Email已存在。");
+                                jump.setPositiveButton("確定", null);
+                                jump.show();
+                            }
+
+                        } catch (Exception e) {
+                            Log.e(TAG, e.toString());
+                        }
+
+                    }
+                }
+            }
+        });
+
         btJoinChecked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,19 +100,18 @@ public class JoinActivity extends AppCompatActivity {
                 }
                 String email = etJoinEmail.getText().toString().trim();
                 String password = etJoinPassword.getText().toString();
-//                String rePassword = etJoinReenterPassword.getText().toString();
-//                if (password.equals(rePassword)){
-//                    return;
-//                }else {
-//                    Common.showToast(context, R.string.msa_PasswordNoRight);
-//                }
+                String rePassword = etJoinReenterPassword.getText().toString();
                 rbgender = (RadioButton) findViewById(rgGroup.getCheckedRadioButtonId());
                 String gender = rbgender.getText().toString();
                 String birthDay = btDate.getText().toString();
                 String phoneNo = etJoinPhone.getText().toString().trim();
                 String address = etJoinAddress.getText().toString().trim();
-                Log.e(TAG, name+ email+ password+ gender +
-                        birthDay+phoneNo+ address);
+                if (!password.equals(rePassword)) {
+                    new AlertDialog.Builder(context)
+                            .setTitle("SS Hotel")
+                            .setMessage("請確認密碼。")
+                            .setPositiveButton("確定", null);
+                }
                 if (Common.networkConnected(JoinActivity.this)){
                     String url = Common.URL + "/CustomerServlet";
                     Customer customer = new Customer(0, email, name, email, password, gender, birthDay, phoneNo, address);
@@ -156,6 +189,8 @@ public class JoinActivity extends AppCompatActivity {
         etJoinAddress = (EditText) findViewById(R.id.etJoinAddress);
         rgGroup = (RadioGroup) findViewById(R.id.rgGender);
 
+
+
     }
 
 
@@ -180,7 +215,7 @@ public class JoinActivity extends AppCompatActivity {
             int resId = bundle.getInt("resId");
             Button button = activity.findViewById(resId);
 
-            // DatePickerDialog will show the date on the clicked button without parse exception
+            // 以下為DatePicker
             int year, month, day;
             Calendar calendar = Calendar.getInstance();
             try {

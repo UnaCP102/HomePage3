@@ -48,6 +48,7 @@ public class ProfileInformationFragment extends Fragment {
     private static final int REQUEST_PICK_PICTURE = 1;
     private CommonTask userFindTask;
     private TextView txMyMemberNumber, txMyName, txMemberEmail, txPhoneNumber;
+    int idCustomer = 0;
 
 
     public ProfileInformationFragment() {
@@ -105,13 +106,13 @@ public class ProfileInformationFragment extends Fragment {
             }
         });
 
-//        fabSetting.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getContext(), ProfileSettingActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        fabSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ProfileSettingActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -158,6 +159,8 @@ public class ProfileInformationFragment extends Fragment {
     private void fillprofile() {
         SharedPreferences preferences = activity.getSharedPreferences
                 (Common.PREF_FILE, MODE_PRIVATE);
+        preferences.edit()
+                .putInt("idCustomer", 0);
         int idCustomer = preferences.getInt("idCustomer", 0);
 
         if (idCustomer == 0){
@@ -169,7 +172,7 @@ public class ProfileInformationFragment extends Fragment {
             String url = Common.URL + "/CustomerServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "findById");
-            jsonObject.addProperty("idCustomer", idCustomer);
+            jsonObject.addProperty("IdCustomer", idCustomer);
 
             String jsonOut = jsonObject.toString();
             userFindTask = new CommonTask(url, jsonOut);

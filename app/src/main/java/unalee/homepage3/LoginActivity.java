@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             if (isLogIn(user, password)) {
                 setResult(RESULT_OK);
                 finish();
+
             }
         }
     }
@@ -75,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                         MODE_PRIVATE);
                 pref.edit()
                         .putBoolean("login", true)
-                        .putInt("idCustomer", Integer.parseInt(idCustomer))
+                        .putInt("IdCustomer",Integer.valueOf(idCustomer))
                         .putString("user", user)
                         .putString("password", password)
 //                        .putString("gender", gender)
@@ -83,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
 //                        .putString("phoneNo", phoneNo)
 //                        .putString("address", address)
                         .apply();
+                Common.showToast(LoginActivity.this, "登入成功");
                 setResult(RESULT_OK);
                 finish();
             } else {
@@ -104,14 +106,14 @@ public class LoginActivity extends AppCompatActivity {
         if (Common.networkConnected(LoginActivity.this)){
             String url = Common.URL + "/CustomerServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "customerLogIn");
-            jsonObject.addProperty("user", user);
+            jsonObject.addProperty("action", "userValid");
+            jsonObject.addProperty("customerID", user);
             jsonObject.addProperty("password", password);
             String jsonOut = jsonObject.toString();
             loginTask = new CommonTask(url, jsonOut);
             try {
                 String result = loginTask.execute().get();
-                if(result == null) {
+                if(result.equals("0")) {
                     Common.showToast(LoginActivity.this, R.string.msg_NoProfileFound);
                 } else {
                     isLogin = true;
@@ -157,90 +159,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 }
 
-
-
-
-
-
-
-
-//            if (user.length() <= 0 || password.length() <= 0) {
-//                showMessage();
-//                return;
-//            }
-//
-//            if (isUserValid(user, password)) {
-//                SharedPreferences pref = getSharedPreferences(Common.PREF_FILE,
-//                        MODE_PRIVATE);
-//                pref.edit()
-//                        .putBoolean("login", true)
-//                        .putInt("customerId", customerId)
-//                        .putString("user", user)
-//                        .putString("password", password)
-//                        .putString("gender", gender)
-//                        .putString("birthday", birthday)
-//                        .putString("phoneNo", phoneNo)
-//                        .putString("address", address)
-//                        .apply();
-//                setResult(RESULT_OK);
-//                finish();
-//            } else {
-//                showMessage();
-//            }
-//        }
-//    };
-//
-//    @Override
-//    protected void  onStart() {
-//        super.onStart();
-//        SharedPreferences pref = getSharedPreferences(Common.PREF_FILE, MODE_PRIVATE);
-//        boolean login = pref.getBoolean("login", false);
-//        if (login) {
-//            String name = pref.getString("user", "");
-//            String password = pref.getString("password", "");
-//            if (isUserValid(name, password)) {
-//                setResult(RESULT_OK);
-//                finish();
-//            } else {
-//                pref.edit().putBoolean("login", false).apply();
-//                showMessage();
-//            }
-//        }
-//    }
-//
-//    private void showMessage() {
-//        new AlertDialog.Builder(context)
-//                .setTitle("SS Hotel")
-//                .setMessage("登入失敗")
-//                .setPositiveButton("OK", null)
-//                .show();
-//    }
-//
-//    private boolean isUserValid(String name, String password) {
-//        String url = Common.URL + "/LoginServlet";
-//        JsonObject jsonObject = new JsonObject();
-//        jsonObject.addProperty("name", name);
-//        jsonObject.addProperty("password", password);
-//        loginTask = new MyTask(url, jsonObject.toString());
-//        boolean isUserValid = false;
-//        try {
-//            String jsonIn = loginTask.execute().get();
-//            jsonObject = new Gson().fromJson(jsonIn, JsonObject.class);
-//            isUserValid = jsonObject.get("isUserValid").getAsBoolean();
-//        }catch (Exception e){
-//            Log.e(TAG, e.toString());
-//        }
-//        return isUserValid;
-//
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        if (loginTask != null) {
-//            loginTask.cancel(true);
-//        }
-//    }
 
 
 

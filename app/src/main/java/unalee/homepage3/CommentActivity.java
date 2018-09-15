@@ -63,7 +63,7 @@ public class CommentActivity extends AppCompatActivity{
                 String commentDetail = etCommentText.getText().toString();
 
                 if (Common.networkConnected(CommentActivity.this)){
-                    String url = Common.URL +  "/CustomerServlet";
+                    String url = Common.URL +  "/CommentServlet";
                     Comment comment = new Comment(0, "", star, commentDetail);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "commentInsert");
@@ -93,6 +93,7 @@ public class CommentActivity extends AppCompatActivity{
                 ratingBar.setRating(0);
                 etCommentText.setText("");
                 Toast.makeText(context, "取消", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
         });

@@ -11,7 +11,7 @@
 
 
         <TextView
-            android:id="@+id/txJoinMyProfile"
+            android:id="@+id/txSettingMyProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity=""
@@ -140,7 +140,7 @@
                 android:background="@color/colorGray"/>
 
             <Button
-                android:id="@+id/btProfileSettingCecked"
+                android:id="@+id/btProfileSettingChecked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"

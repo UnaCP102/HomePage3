@@ -109,8 +109,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (requestCode == 2){
+                //在ProfileSettingActivity裡設定
                 ProfileFragment profileFragment = new ProfileFragment();
                 changeFragment(profileFragment);
+            }
+
+            if (requestCode == 3){
+                //在LoginActivity裡設定
+                HomePageFragment homePageFragment = new HomePageFragment();
+                changeFragment(homePageFragment);
             }
         }
     }
