@@ -3,6 +3,7 @@ package unalee.homepage3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,25 +13,31 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class ProfileCommentFragment extends Fragment {
+import unalee.homepage3.Task.RecycleItemTouchHelper;
+
+import static android.content.Context.MODE_PRIVATE;
+
+public class ProfileCommentFragment extends Fragment  {
     private static final String TAG = "ProfileCommentFragment";
     private FragmentActivity activity;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private CommonTask personComment;
-    private RecyclerView rvComments;
+    private CommonTask ratingGetAllTask;
+    private RecyclerView rvRating;
+    private ProfileFragment.Adapter adapter;
 
     public ProfileCommentFragment() {
 
@@ -40,8 +47,51 @@ public class ProfileCommentFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        showAllSpots();
 
 
+
+
+       ItemTouchHelper.Callback callback = new RecycleItemTouchHelper(rvRating);
+       ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+       itemTouchHelper.attachToRecyclerView(rvRating);
+
+
+    }
+
+    private void showAllSpots() {
+        SharedPreferences preferences = activity.getSharedPreferences
+                (Common.PREF_FILE, MODE_PRIVATE);
+        int idCustomer = preferences.getInt("IdCustomer", 0);
+        if (Common.networkConnected(activity)){
+            String url = Common.URL + "/RatingServlet";
+            List<Rating> ratings = null;
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getAll");
+            jsonObject.addProperty("IdCustomer", idCustomer);
+            String jsonOut = jsonObject.toString();
+            ratingGetAllTask = new CommonTask(url, jsonOut);
+            try {
+                String jsonIn = ratingGetAllTask.execute().get();
+                Type listType = new TypeToken<List<Rating>>() {
+                }.getType();
+                ratings = new Gson().fromJson(jsonIn, listType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (ratings == null || ratings.isEmpty()) {
+                Common.showToast(activity, R.string.msg_NoCommentsFound);
+            } else {
+                rvRating.setAdapter(new RatingRecyclerViewAdapter(activity, ratings));
+            }
+        } else {
+            Common.showToast(activity, R.string.msg_NoNetwork);
+        }
     }
 
 
@@ -56,99 +106,23 @@ public class ProfileCommentFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                showPersonComments();
+                showAllSpots();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
 
-        rvComments = view.findViewById(R.id.rvComments);
-        rvComments.setLayoutManager(new LinearLayoutManager(activity));
+        rvRating = view.findViewById(R.id.rvRatings);
+        rvRating.setLayoutManager(new LinearLayoutManager(activity));
         FloatingActionButton btCommentAdd = view.findViewById(R.id.btCommentAdd);
         btCommentAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, CommentActivity.class);
+                Intent intent = new Intent(activity, RatingActivity.class);
                 startActivity(intent);
             }
         });
         return view;
-    }
 
-    private void showPersonComments() {
-        if (Common.networkConnected(activity)) {
-            String url = Common.URL + "/CommentServlet";
-            List<Comment> comments = null;
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getPersonComment");
-            String jsonOut = jsonObject.toString();
-            personComment = new CommonTask(url, jsonOut);
-            try {
-                String jsonIn = personComment.execute().get();
-                Type listType = new TypeToken<List<Comment>>() {
-                }.getType();
-                comments = new Gson().fromJson(jsonIn, listType);
-            } catch (Exception e) {
-                Log.e(TAG, e.toString());
-            }
-            if (comments == null || comments.isEmpty()) {
-                Common.showToast(activity, R.string.msg_NoCommentsFound);
-            } else {
-                rvComments.setAdapter(new CommentsRecyclerViewAdapter(activity, comments));
-            }
-        } else {
-            Common.showToast(activity, R.string.msg_NoNetwork);
-        }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        showPersonComments();
-    }
-
-    private class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<CommentsRecyclerViewAdapter.MyViewHolder> {
-        private LayoutInflater layoutInflater;
-        private List<Comment> comments;
-
-        CommentsRecyclerViewAdapter(Context context, List<Comment> comments) {
-            layoutInflater = LayoutInflater.from(context);
-            this.comments = comments;
-        }
-
-        class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView tvCommentDate, tvCommentDetail;
-            RatingBar rbCard;
-
-            MyViewHolder(View itemView) {
-                super(itemView);
-                tvCommentDate = itemView.findViewById(R.id.tvCommentDate);
-                rbCard = itemView.findViewById(R.id.rbCard);
-                tvCommentDetail = itemView.findViewById(R.id.tvCommentDetail);
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return comments.size();
-        }
-
-
-        @NonNull
-        @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = layoutInflater.inflate(R.layout.item_view_comment, parent, false);
-            return new MyViewHolder(itemView);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
-            final Comment comment = comments.get(position);
-            String url = Common.URL + "/CommentServlet";
-            int commentId = comment.getCustomerId();
-            myViewHolder.tvCommentDate.setText(comment.getCommentDate());
-            myViewHolder.rbCard.setRating(comment.getStar());
-            myViewHolder.tvCommentDetail.setText(comment.getCommentDetail());
-        }
     }
 
     private void switchFragment(Fragment fragment) {
@@ -160,10 +134,78 @@ public class ProfileCommentFragment extends Fragment {
     @Override
     public void onStop(){
         super.onStop();
-        if (personComment != null){
-            personComment.cancel(true);
-            personComment = null;
+        if (ratingGetAllTask != null){
+            ratingGetAllTask.cancel(true);
+            ratingGetAllTask = null;
         }
     }
-}
 
+    private class RatingRecyclerViewAdapter extends RecyclerView.Adapter<RatingRecyclerViewAdapter.MyViewHolder> {
+        private LayoutInflater layoutInflater;
+        private List<Rating> ratings;
+        private RelativeLayout layout;
+
+        RatingRecyclerViewAdapter(Context context, List<Rating> ratings) {
+            this.layoutInflater = LayoutInflater.from(context);
+            this.ratings = ratings;
+        }
+
+        @NonNull
+        @Override
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+            View itemView = layoutInflater.inflate(R.layout.item_view_comment, parent, false);
+            return new MyViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
+            final Rating rating = ratings.get(position);
+            myViewHolder.tvIdRoomReservation.setText(String.valueOf(rating.getIdRoomReservation()));
+            myViewHolder.rbCardStar.setRating(rating.getRatingStar());
+            myViewHolder.tvRatingOpinion.setText(rating.getOpinion());
+            myViewHolder.tvRatingReview.setText(rating.getReview());
+
+
+            layout.setOnLongClickListener(new View.OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View view) {
+                    Bundle bundle = new Bundle();
+                    Rating rating1 = new Rating(rating.getIdRoomReservation(), rating.getRatingStar(), rating.getOpinion());
+                    bundle.putSerializable("rating", rating1);
+                    Intent intent = new Intent(activity, RatingSettingActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    return false;
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return ratings.size();
+        }
+
+        class MyViewHolder extends RecyclerView.ViewHolder {
+            TextView tvRatingOpinion, tvRatingReview, tvIdRoomReservation;
+            RatingBar rbCardStar;
+            RecyclerView rvRatings;
+
+            public MyViewHolder(View itemView) {
+                super(itemView);
+                tvRatingOpinion = itemView.findViewById(R.id.tvRatingOpinion);
+                rbCardStar = itemView.findViewById(R.id.rbCardStar);
+                tvRatingReview = itemView.findViewById(R.id.tvRatingReview);
+                tvIdRoomReservation = itemView.findViewById(R.id.tvIdRoomReservation);
+                layout = itemView.findViewById(R.id.layout);
+                rvRatings = itemView.findViewById(R.id.rvRatings);
+
+
+
+            }
+        }
+
+    }
+
+
+}

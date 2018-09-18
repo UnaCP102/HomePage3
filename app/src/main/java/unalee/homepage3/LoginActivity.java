@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     private Context context;
     private Button btLogIn, btJoin;
     private CommonTask loginTask;
-
     String idCustomer = null;
 
     @Override
@@ -77,13 +76,14 @@ public class LoginActivity extends AppCompatActivity {
                 pref.edit()
                         .putBoolean("login", true)
                         .putInt("IdCustomer",Integer.valueOf(idCustomer))
-                        .putString("user", user)
+                        .putString("email", user)
                         .putString("password", password)
 //                        .putString("gender", gender)
 //                        .putString("birthday", birthday)
 //                        .putString("phoneNo", phoneNo)
 //                        .putString("address", address)
                         .apply();
+                Log.e("IdCustomer", idCustomer);
                 Common.showToast(LoginActivity.this, "登入成功");
                 setResult(RESULT_OK);
                 finish();
@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             String url = Common.URL + "/CustomerServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "userValid");
-            jsonObject.addProperty("customerID", user);
+            jsonObject.addProperty("email", user);
             jsonObject.addProperty("password", password);
             String jsonOut = jsonObject.toString();
             loginTask = new CommonTask(url, jsonOut);

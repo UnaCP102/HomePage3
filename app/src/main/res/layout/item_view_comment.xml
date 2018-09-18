@@ -15,32 +15,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <TextView
-            android:id="@+id/tvCommentDate"
+            android:id="@+id/tvIdRoomReservation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="8dp"
-            android:text="Date and Time"
+            android:layout_marginTop="5dp"
+            android:text="IdRoomReservation"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="10sp" />
 
         <RatingBar
-            android:id="@+id/rbCard"
+            android:id="@+id/rbCardStar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/tvCommentDate"
-            android:layout_below="@id/tvCommentDate"
+            android:layout_below="@id/tvIdRoomReservation"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
             style="?android:attr/ratingBarStyleSmall"/>
 
         <TextView
-            android:id="@+id/tvCommentDetail"
+            android:id="@+id/tvRatingOpinion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/tvCommentDate"
-            android:layout_below="@id/rbCard"
-            android:text="Comment Detail"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/rbCardStar"
+            android:text="Opinion"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+
+
+        <TextView
+            android:id="@+id/tvRatingReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvRatingOpinion"
+            android:layout_below="@id/tvRatingOpinion"
+            android:text="Review"
             android:textColor="#555555" />
 
     </RelativeLayout>

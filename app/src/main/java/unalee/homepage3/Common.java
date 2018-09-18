@@ -13,7 +13,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Common {
@@ -82,6 +84,10 @@ public class Common {
     public static void showToast(Context context, int messageResId) {
         Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
     }
+
+//    public static void setCustomerInformation
+
+    public static List<Rating> TOTAL = new ArrayList<>();
 
 
 }

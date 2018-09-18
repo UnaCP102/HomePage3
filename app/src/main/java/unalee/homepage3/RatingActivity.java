@@ -15,10 +15,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 
-public class CommentActivity extends AppCompatActivity{
+public class RatingActivity extends AppCompatActivity{
     final static String TAG = "CommentActivity";
     private Button btCommentCancel, btCommentOK;
-    private EditText etCommentText;
+    private EditText etOpinion;
     private RatingBar ratingBar;
     private Context context;
 
@@ -32,12 +32,13 @@ public class CommentActivity extends AppCompatActivity{
         findView();
     }
 
+
     private void findView() {
         btCommentCancel = (Button) findViewById(R.id.btCommentCancel);
         btCommentOK = (Button) findViewById(R.id.btCommentOK);
-        etCommentText = (EditText) findViewById(R.id.etCommentText);
+        etOpinion = (EditText) findViewById(R.id.etOpinion);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        context = CommentActivity.this;
+        context = RatingActivity.this;
 
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -59,15 +60,15 @@ public class CommentActivity extends AppCompatActivity{
                     return;
                 }
 
-                int star = ratingBar.getNumStars();
-                String commentDetail = etCommentText.getText().toString();
+                Float ratingStar = ratingBar.getRating();
+                String opinion = etOpinion.getText().toString();
 
-                if (Common.networkConnected(CommentActivity.this)){
-                    String url = Common.URL +  "/CommentServlet";
-                    Comment comment = new Comment(0, "", star, commentDetail);
+                if (Common.networkConnected(RatingActivity.this)){
+                    String url = Common.URL +  "/RatingServlet";
+                    Rating comment = new Rating(0, ratingStar, opinion, "", 7);
                     JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("action", "commentInsert");
-                    jsonObject.addProperty("comment", new Gson().toJson(comment));
+                    jsonObject.addProperty("action", "ratingInsert");
+                    jsonObject.addProperty("rating", new Gson().toJson(comment));
                     int count =0;
                     try {
                         String result = new CommonTask(url, jsonObject.toString()).execute().get();
@@ -91,7 +92,7 @@ public class CommentActivity extends AppCompatActivity{
             @Override
             public void onClick (View view){
                 ratingBar.setRating(0);
-                etCommentText.setText("");
+                etOpinion.setText("");
                 Toast.makeText(context, "取消", Toast.LENGTH_SHORT).show();
                 finish();
             }

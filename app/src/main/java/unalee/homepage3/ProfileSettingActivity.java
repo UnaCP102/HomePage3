@@ -72,12 +72,12 @@ public class ProfileSettingActivity extends AppCompatActivity{
 //                }
                 String phoneNo = etProfileSettingPhone.getText().toString().trim();
                 String address = etProfileSettingAddress.getText().toString().trim();
-                int idCustomer = preferences.getInt("idCustomer", 0);
+                int idCustomer = preferences.getInt("IdCustomer", 0);
                 if (Common.networkConnected(ProfileSettingActivity.this)){
                     String url = Common.URL + "/CustomerServlet";
                     Customer customer = new Customer(idCustomer, password, phoneNo, address);
                     JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("action", "customerUpdate");
+                    jsonObject.addProperty("action", "update");
                     jsonObject.addProperty("customer", new Gson().toJson(customer));
                     int count = 0;
                     String result = null;
@@ -125,13 +125,13 @@ public class ProfileSettingActivity extends AppCompatActivity{
 
     private void fillprofile() {
         preferences = activity.getSharedPreferences(Common.PREF_FILE, MODE_PRIVATE);
-            int idCustomer = preferences.getInt("idCustomer", 0);
+            int idCustomer = preferences.getInt("IdCustomer", 0);
 
             if (Common.networkConnected(activity)) {
                 String url = Common.URL + "/CustomerServlet";
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("action", "findById");
-                jsonObject.addProperty("idCustomer", idCustomer);
+                jsonObject.addProperty("IdCustomer", idCustomer);
 
                 String jsonOut = jsonObject.toString();
                 userFindTask = new CommonTask(url, jsonOut);
@@ -149,6 +149,7 @@ public class ProfileSettingActivity extends AppCompatActivity{
                 } else {
                     txProfileSettingName.setText(customer.getName());
                     txProfileSettingEmail.setText(customer.getEmail());
+                    etProfileSettingPassword.setText(customer.getPassword());
                     txProfileSettingBDay.setText(customer.getBirthday());
                     etProfileSettingPhone.setText(customer.getPhone());
                     etProfileSettingAddress.setText(customer.getAddress());

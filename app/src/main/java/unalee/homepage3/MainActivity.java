@@ -104,8 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 ProfileFragment profileFragment = new ProfileFragment();
                 changeFragment(profileFragment);
                 // 建立並切換到profile fragment
-            }else {
-                finish();
             }
 
             if (requestCode == 2){
@@ -118,6 +116,11 @@ public class MainActivity extends AppCompatActivity {
                 //在LoginActivity裡設定
                 HomePageFragment homePageFragment = new HomePageFragment();
                 changeFragment(homePageFragment);
+            }
+
+            if (requestCode == 4){
+                Fragment fragment = new ProfileCommentFragment();
+                changeFragment(fragment);
             }
         }
     }

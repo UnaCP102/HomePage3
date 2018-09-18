@@ -4,7 +4,6 @@ import android.Manifest;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,11 +17,11 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,11 +29,8 @@ import android.widget.TextView;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
+import java.io.ByteArrayOutputStream;
 
-import java.lang.reflect.Type;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 
 public class ProfileInformationFragment extends Fragment {
@@ -48,10 +44,11 @@ public class ProfileInformationFragment extends Fragment {
     private static final int REQUEST_PICK_PICTURE = 1;
     private CommonTask userFindTask;
     private TextView txMyMemberNumber, txMyName, txMemberEmail, txPhoneNumber;
-    int idCustomer = 0;
+    private byte[] image;
 
 
-    public ProfileInformationFragment() {
+
+    public ProfileInformationFragment(){
 
     }
 
@@ -74,16 +71,7 @@ public class ProfileInformationFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        imageView = getActivity().findViewById(R.id.ivProfilePicture);
-        ibChange = getActivity().findViewById(R.id.ibChange);
-        fabLogOut = getActivity().findViewById(R.id.fabLogOut);
-        fabSetting = getActivity().findViewById(R.id.fabSetting);
-        txMyMemberNumber = getActivity().findViewById(R.id.txMyMemberNumber);
-        txMyName = getActivity().findViewById(R.id.txMyName);
-        txMemberEmail = getActivity().findViewById(R.id.txMemberEmail);
-        txPhoneNumber = getActivity().findViewById(R.id.txPhoneNumber);
-
-
+        findview();
 
         ibChange.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +81,7 @@ public class ProfileInformationFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_PICK_PICTURE);
                 ibChange.bringToFront(); //把相機那張圖一直放在最上面
             }
+
         });
 
         fabLogOut.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +89,10 @@ public class ProfileInformationFragment extends Fragment {
             public void onClick(View view) {
                 SharedPreferences pref = getActivity().getSharedPreferences(Common.PREF_FILE,
                         Context.MODE_PRIVATE);
-                pref.edit().putBoolean("login", false).apply();
+                pref.edit().putBoolean("login", false)
+                        .putString("email", "")
+                        .putString("password", "")
+                        .apply();
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
             }
@@ -113,15 +105,23 @@ public class ProfileInformationFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+    }
+
+    private void findview() {
+        imageView = getActivity().findViewById(R.id.ivProfilePicture);
+        ibChange = getActivity().findViewById(R.id.ibChange);
+        fabLogOut = getActivity().findViewById(R.id.fabLogOut);
+        fabSetting = getActivity().findViewById(R.id.fabSetting);
+        txMyMemberNumber = getActivity().findViewById(R.id.txMyMemberNumber);
+        txMyName = getActivity().findViewById(R.id.txMyName);
+        txMemberEmail = getActivity().findViewById(R.id.txMemberEmail);
+        txPhoneNumber = getActivity().findViewById(R.id.txPhoneNumber);
     }
 
 
-
-
-
-
     //以下為選照片method
-        @Override
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == RESULT_OK) {
             int newSize = 512;
@@ -146,7 +146,6 @@ public class ProfileInformationFragment extends Fragment {
                             Bitmap downsizedImage = Common.downSize(srcImage, newSize);
                             imageView.setImageBitmap(downsizedImage);
                         }
-
                     }
                     break;
             }
@@ -154,14 +153,29 @@ public class ProfileInformationFragment extends Fragment {
     }
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case Common.REQ_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    ibChange.setEnabled(true);
+                } else {
+                    ibChange.setEnabled(false);
+                }
+                break;
+        }
+    }
 
     @SuppressLint("LongLogTag")
     private void fillprofile() {
         SharedPreferences preferences = activity.getSharedPreferences
                 (Common.PREF_FILE, MODE_PRIVATE);
         preferences.edit()
-                .putInt("idCustomer", 0);
-        int idCustomer = preferences.getInt("idCustomer", 0);
+                .putInt("IdCustomer", 0);
+        int idCustomer = preferences.getInt("IdCustomer", 0);
 
         if (idCustomer == 0){
             Common.showToast(activity, R.string.msg_NoProfileFound);
@@ -200,19 +214,4 @@ public class ProfileInformationFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case Common.REQ_EXTERNAL_STORAGE:
-                if (grantResults.length > 0 &&
-                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    ibChange.setEnabled(true);
-                } else {
-                    ibChange.setEnabled(false);
-                }
-                break;
-        }
-    }
 }

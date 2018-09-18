@@ -14,14 +14,14 @@
         android:textSize="20sp" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/rbCommentSettingRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
         android:stepSize="0.5" />
 
     <EditText
-        android:id="@+id/etOpinion"
+        android:id="@+id/etCommentSettingOpinion"
         android:layout_width="match_parent"
         android:layout_height="390dp"
         android:padding="5dp"
@@ -36,13 +36,13 @@
         android:layout_gravity="center">
 
         <Button
-            android:id="@+id/btCommentCancel"
+            android:id="@+id/btCommentSettingCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="取消"/>
 
         <Button
-            android:id="@+id/btCommentOK"
+            android:id="@+id/btCommentSettingOK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="送出"/>
