@@ -36,26 +36,35 @@ public class ImageTask extends AsyncTask<Object, Integer, Bitmap> {
         this.imageViewWeakReference = new WeakReference<>(imageView);
     }
 
+    public ImageTask(String url, int id){
+        this.url = url;
+        this.id = id;
+    }
+
     @Override
     protected Bitmap doInBackground(Object... objects) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("action", "getImage");
-        jsonObject.addProperty("imageId", id);
+        jsonObject.addProperty("IdCustomer", id);
         jsonObject.addProperty("imageSize", imageSize);
         return getRemoteImage(url, jsonObject.toString());
     }
 
     @Override
     protected void onPostExecute(Bitmap bitmap) {
-        ImageView imageView = imageViewWeakReference.get();
-        if (isCancelled() || imageView == null) {
-            return;
+        if(imageViewWeakReference != null) {
+            ImageView imageView = imageViewWeakReference.get();
+            if (isCancelled() || imageView == null) {
+                return;
+            }
+            if (bitmap != null) {
+                imageView.setImageBitmap(bitmap);
+            } else {
+                imageView.setImageResource(R.drawable.exit128);
+            }
         }
-        if (bitmap != null) {
-            imageView.setImageBitmap(bitmap);
-        } else {
-            imageView.setImageResource(R.drawable.exit128);
-        }
+
+
     }
 
     private Bitmap getRemoteImage(String url, String jsonOut) {

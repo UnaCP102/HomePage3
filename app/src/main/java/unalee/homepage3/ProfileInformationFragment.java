@@ -30,6 +30,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.ByteArrayOutputStream;
+import java.sql.Blob;
 
 
 
@@ -48,6 +49,7 @@ public class ProfileInformationFragment extends Fragment {
 
 
 
+
     public ProfileInformationFragment(){
 
     }
@@ -57,6 +59,7 @@ public class ProfileInformationFragment extends Fragment {
                              Bundle savedInstanceState) {
         activity = getActivity();
         return inflater.inflate(R.layout.fragment_profile_information, container, false);
+
     }
 
     @Override
@@ -65,6 +68,8 @@ public class ProfileInformationFragment extends Fragment {
         String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
         Common.askPermissions(getActivity(), permissions, Common.REQ_EXTERNAL_STORAGE);
         fillprofile();
+
+
     }
 
     @Override
@@ -74,6 +79,7 @@ public class ProfileInformationFragment extends Fragment {
         findview();
 
         ibChange.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK,
@@ -81,15 +87,14 @@ public class ProfileInformationFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_PICK_PICTURE);
                 ibChange.bringToFront(); //把相機那張圖一直放在最上面
             }
-
         });
 
         fabLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences pref = getActivity().getSharedPreferences(Common.PREF_FILE,
-                        Context.MODE_PRIVATE);
-                pref.edit().putBoolean("login", false)
+                SharedPreferences preferences = activity.getSharedPreferences
+                        (Common.PREF_FILE, MODE_PRIVATE);
+                preferences.edit().putBoolean("login", false)
                         .putString("email", "")
                         .putString("password", "")
                         .apply();
@@ -121,6 +126,7 @@ public class ProfileInformationFragment extends Fragment {
 
 
     //以下為選照片method
+    @SuppressLint("LongLogTag")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == RESULT_OK) {
@@ -145,12 +151,45 @@ public class ProfileInformationFragment extends Fragment {
                             Bitmap srcImage = BitmapFactory.decodeFile(imagePath);
                             Bitmap downsizedImage = Common.downSize(srcImage, newSize);
                             imageView.setImageBitmap(downsizedImage);
+                            ByteArrayOutputStream out = new ByteArrayOutputStream();
+                            srcImage.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                            image = out.toByteArray();
                         }
                     }
                     break;
             }
         }
-    }
+
+            String imageBase64 = "";
+            if (image != null) imageBase64 = Base64.encodeToString(image, Base64.DEFAULT);
+        SharedPreferences preferences = activity.getSharedPreferences
+                (Common.PREF_FILE, MODE_PRIVATE);
+            int idCustomer = preferences.getInt("IdCustomer", 0);
+
+            if (Common.networkConnected(activity)) {
+                String url = Common.URL + "/CustomerServlet";
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("action", "updateImage");
+                jsonObject.addProperty("IdCustomer", idCustomer);
+                jsonObject.addProperty("imageBase64", imageBase64);
+
+                String jsonOut = jsonObject.toString();
+                userFindTask = new CommonTask(url, jsonOut);
+                Customer customer = null;
+                try {
+                    String result = userFindTask.execute().get();
+                    Log.e(TAG, "result:" + result);
+                    customer = new Gson().fromJson(result, Customer.class);
+                } catch (Exception e) {
+                    Log.e(TAG, e.toString());
+                }
+                if (customer == null) {
+                    Common.showToast(activity, R.string.msg_NoProfileFound);
+
+                }
+            }
+        }
+
 
 
     @Override
@@ -173,8 +212,6 @@ public class ProfileInformationFragment extends Fragment {
     private void fillprofile() {
         SharedPreferences preferences = activity.getSharedPreferences
                 (Common.PREF_FILE, MODE_PRIVATE);
-        preferences.edit()
-                .putInt("IdCustomer", 0);
         int idCustomer = preferences.getInt("IdCustomer", 0);
 
         if (idCustomer == 0){
@@ -204,13 +241,42 @@ public class ProfileInformationFragment extends Fragment {
             } else {
                 customer.setIdCustomer(idCustomer);
                 txMyMemberNumber.setText(String.valueOf(customer.getIdCustomer()));
-//                imageView.setImageResource(customer.getCustomerPic());
+                customerImage(customer.getIdCustomer());
                 txMyName.setText(customer.getName());
                 txMemberEmail.setText(customer.getEmail());
                 txPhoneNumber.setText(customer.getPhone());
             }
         }else {
             Common.showToast(activity, R.string.msg_NoNetwork);
+        }
+
+
+
+    }
+
+    @SuppressLint("LongLogTag")
+    private void customerImage(int IdCustomer) {
+        SharedPreferences preferences = activity.getSharedPreferences
+                (Common.PREF_FILE, MODE_PRIVATE);
+        int idCustomer = preferences.getInt("IdCustomer", 0);
+        String url = Common.URL + "/CustomerServlet";
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("action", "getImage");
+        jsonObject.addProperty("IdCustomer", idCustomer);
+        Bitmap bitmap = null;
+
+        try {
+            bitmap = new ImageTask(url, IdCustomer).execute().get();
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+        if (bitmap != null) {
+            imageView.setImageBitmap(bitmap);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            image = out.toByteArray();
+        } else {
+            imageView.setImageResource(R.drawable.man128);
         }
     }
 
