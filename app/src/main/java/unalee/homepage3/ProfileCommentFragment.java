@@ -43,7 +43,7 @@ public class ProfileCommentFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private CommonTask ratingGetAllTask;
     private SwipeMenuRecyclerView rvRating;
-    private ProfileFragment.Adapter adapter;
+
 
 
 
@@ -117,31 +117,31 @@ public class ProfileCommentFragment extends Fragment {
 
         rvRating = view.findViewById(R.id.rvRatings);
         rvRating.setLayoutManager(new LinearLayoutManager(activity));
-        rvRating.setSwipeMenuCreator(new SwipeMenuCreator() {
-            @Override
-            public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
-                if (viewType == RatingRecyclerViewAdapter.VIEW_TYPE_NON_STICKY){
-                    int width = getResources().getDimensionPixelSize(R.dimen.dp_70);
-                    int height = ViewGroup.LayoutParams.MATCH_PARENT;
+//        rvRating.setSwipeMenuCreator(new SwipeMenuCreator() {
+//            @Override
+//            public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
+//                if (viewType == RatingRecyclerViewAdapter.VIEW_TYPE_NON_STICKY){
+//                    int width = getResources().getDimensionPixelSize(R.dimen.dp_70);
+//                    int height = ViewGroup.LayoutParams.MATCH_PARENT;
+//
+//                    SwipeMenuItem deleteItem = new SwipeMenuItem(activity)
+//                            .setBackground(R.drawable.style_delete)
+//                            .setImage(R.drawable.delete128)
+//                            .setText("Delete")
+//                            .setTextColor(Color.WHITE)
+//                            .setTextSize(16)
+//                            .setWeight(width)
+//                            .setHeight(height);
+//                    swipeRightMenu.addMenuItem(deleteItem);
+//
+//                }
+//            }
+//        });
 
-                    SwipeMenuItem deleteItem = new SwipeMenuItem(activity)
-                            .setBackground(R.drawable.style_delete)
-                            .setImage(R.drawable.delete128)
-                            .setText("Delete")
-                            .setTextColor(Color.WHITE)
-                            .setTextSize(16)
-                            .setWeight(width)
-                            .setHeight(height);
-                    swipeRightMenu.addMenuItem(deleteItem);
-
-                }
-            }
-        });
-
-        rvRating.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
-            @Override
-            public void onItemClick(SwipeMenuBridge menuBridge) {
-
+//        rvRating.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
+//            @Override
+//            public void onItemClick(SwipeMenuBridge menuBridge) {
+//
 //                int idCustomer = ;
 //                if (Common.networkConnected(activity)) {
 //                    String url = Common.URL + "/RatingServlet";
@@ -150,8 +150,8 @@ public class ProfileCommentFragment extends Fragment {
 //                    jsonObject.addProperty("action", "delete");
 //                    jsonObject.addProperty("IdCustomer", idCustomer);
 //                }
-            }
-        });
+//            }
+//        });
 
 
 
@@ -238,6 +238,7 @@ public class ProfileCommentFragment extends Fragment {
                 llReview.setVisibility(View.GONE);
             }
 
+            //展開評論
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

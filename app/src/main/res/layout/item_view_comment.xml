@@ -11,16 +11,6 @@
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="6dp">
 
-    <!--<com.yanzhenjie.recyclerview.swipe.SwipeMenuLayout-->
-        <!--xmlns:swipe="http://schemas.android.com/apk/res-auto"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:clickable="true"-->
-        <!--swipe:contentViewId="@+id/content_view"-->
-        <!--swipe:leftViewId="@+id/left_view"-->
-        <!--swipe:rightViewId="@+id/right_view">-->
-
-
     <RelativeLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
@@ -63,6 +53,7 @@
             android:layout_marginTop="5dp"
             android:layout_below="@id/rbCardStar"
             android:text="Opinion"
+            android:layout_marginBottom="20dp"
             android:textColor="#000000"
             android:textSize="16sp" />
 
@@ -71,26 +62,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvRatingOpinion"
-
             android:layout_marginRight="12dp"
-            android:layout_alignLeft="@id/tvRatingOpinion"
-            >
+            android:layout_alignLeft="@id/tvRatingOpinion">
 
-            <TextView
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+
+                <TextView
                 android:id="@+id/tvRatingReview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="90dp"
                 android:text="Review"
+                android:layout_marginBottom="20dp"
                 android:textColor="#555555" />
 
+                <ImageButton
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/delete128"/>
+
+             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
-
-        <!--<Button-->
-            <!--android:id="@id/right_view"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="100dp"-->
-            <!--android:text="右面Button"/>-->
-    <!--右面Button</com.yanzhenjie.recyclerview.swipe.SwipeMenuLayout>-->
 </android.support.v7.widget.CardView>
