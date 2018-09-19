@@ -6,8 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -98,10 +97,10 @@ public class ProfileCommentFragment extends Fragment {
     }
 
 
-    @Nullable
+
     @Override
-    public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup parent,
-                             @Nullable final Bundle savedInstanceState) {
+    public View onCreateView( LayoutInflater inflater,  ViewGroup parent,
+                             final Bundle savedInstanceState) {
         super.onCreateView(inflater, parent, savedInstanceState);
 //        rvRating.getItemAnimator().setChangeDuration(300);
 //        rvRating.getItemAnimator().setMoveDuration(300);
@@ -217,15 +216,15 @@ public class ProfileCommentFragment extends Fragment {
             this.ratings = ratings;
         }
 
-        @NonNull
+
         @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        public MyViewHolder onCreateViewHolder( ViewGroup parent, int i) {
             View itemView = layoutInflater.inflate(R.layout.item_view_comment, parent, false);
             return new MyViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int position) {
+        public void onBindViewHolder( final MyViewHolder myViewHolder, int position) {
             final Rating rating = ratings.get(position);
             myViewHolder.tvIdRoomReservation.setText(String.valueOf(rating.getIdRoomReservation()));
             myViewHolder.rbCardStar.setRating(rating.getRatingStar());
