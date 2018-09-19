@@ -256,13 +256,7 @@ public class ProfileInformationFragment extends Fragment {
 
     @SuppressLint("LongLogTag")
     private void customerImage(int IdCustomer) {
-        SharedPreferences preferences = activity.getSharedPreferences
-                (Common.PREF_FILE, MODE_PRIVATE);
-        int idCustomer = preferences.getInt("IdCustomer", 0);
         String url = Common.URL + "/CustomerServlet";
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("action", "getImage");
-        jsonObject.addProperty("IdCustomer", idCustomer);
         Bitmap bitmap = null;
 
         try {

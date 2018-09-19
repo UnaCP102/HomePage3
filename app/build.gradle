@@ -33,4 +33,5 @@ dependencies {
     implementation 'com.getbase:floatingactionbutton:1.10.1'
     implementation 'com.github.clans:fab:1.6.4'
     implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
 }

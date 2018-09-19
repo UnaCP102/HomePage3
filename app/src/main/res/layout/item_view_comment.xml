@@ -13,14 +13,24 @@
     <RelativeLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_rating">
+        <TextView
+            android:id="@+id/ratingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:text="訂單編號"
+            android:textColor="#000000"
+            android:textSize="10sp" />
         <TextView
             android:id="@+id/tvIdRoomReservation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/ratingText"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:text="IdRoomReservation"
             android:textColor="#000000"
             android:textSize="10sp" />
@@ -45,16 +55,24 @@
             android:textColor="#000000"
             android:textSize="16sp" />
 
-
-
-        <TextView
-            android:id="@+id/tvRatingReview"
+        <LinearLayout
+            android:id="@+id/llReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/tvRatingOpinion"
             android:layout_below="@id/tvRatingOpinion"
-            android:text="Review"
-            android:textColor="#555555" />
 
+            android:layout_marginRight="12dp"
+            android:layout_alignLeft="@id/tvRatingOpinion"
+            >
+
+            <TextView
+                android:id="@+id/tvRatingReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="90dp"
+                android:text="Review"
+                android:textColor="#555555" />
+
+        </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
