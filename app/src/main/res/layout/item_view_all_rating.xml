@@ -11,68 +11,93 @@
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="6dp">
 
+
+
     <RelativeLayout
-        android:id="@+id/layout"
+        android:id="@+id/alllRatingayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_rating">
+
         <TextView
-            android:id="@+id/ratingText"
+            android:id="@+id/tvRatingName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="10dp"
+            android:text="顧客姓名"/>
+
+        <TextView
+            android:id="@+id/tvRatingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="15dp"
+            android:text="time"
+            android:layout_below="@+id/tvRatingName"
+            />
+
+        <TextView
+            android:id="@+id/txRoomReservation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/tvRatingName"
             android:text="訂單編號"
             android:textColor="#000000"
             android:textSize="10sp" />
+
         <TextView
-            android:id="@+id/tvIdRoomReservation"
+            android:id="@+id/tvAllIdRoomReservation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/ratingText"
+            android:layout_toEndOf="@id/txRoomReservation"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/tvRatingName"
             android:text="IdRoomReservation"
             android:textColor="#000000"
             android:textSize="10sp" />
 
         <RatingBar
-            android:id="@+id/rbCardStar"
+            android:id="@+id/rbAllCardStar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvIdRoomReservation"
+            android:layout_below="@id/tvAllIdRoomReservation"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             style="?android:attr/ratingBarStyleSmall"/>
 
         <TextView
-            android:id="@+id/tvRatingOpinion"
+            android:id="@+id/tvAllRatingOpinion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="5dp"
-            android:layout_below="@id/rbCardStar"
+            android:layout_below="@id/rbAllCardStar"
             android:text="Opinion"
             android:layout_marginBottom="20dp"
             android:textColor="#000000"
             android:textSize="16sp" />
 
         <LinearLayout
-            android:id="@+id/llReview"
+            android:id="@+id/llAllReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvRatingOpinion"
+            android:layout_below="@id/tvAllRatingOpinion"
             android:layout_marginRight="12dp"
             android:layout_alignLeft="@id/tvRatingOpinion">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
                 >
 
 
                 <TextView
-                android:id="@+id/tvRatingReview"
+                android:id="@+id/tvAllRatingReview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="90dp"
@@ -80,14 +105,14 @@
                 android:layout_marginBottom="20dp"
                 android:textColor="#555555" />
 
-                <ImageButton
-                    android:id="@+id/ibDelete"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/delete128"/>
+                <!--<ImageButton-->
+                    <!--android:id="@+id/ibDelete"-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_marginEnd="20dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:background="@drawable/delete128"/>-->
 
              </RelativeLayout>
         </LinearLayout>

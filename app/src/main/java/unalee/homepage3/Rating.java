@@ -1,17 +1,20 @@
 package unalee.homepage3;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class Rating implements Serializable{
     private int IdRating, IdRoomReservation;
     private float ratingStar;
-    private String opinion, review;
+    private String opinion, review, time, Name;
+    ;
 
 
-    public Rating(int IdRating, float ratingStar, String opinion, String review,
+    public Rating(int IdRating, float ratingStar, String time, String opinion, String review,
                   int IdRoomReservation) {
         this.IdRating = IdRating;
         this.ratingStar = ratingStar;
+        this.time = time;
         this.opinion = opinion;
         this.review = review;
         this.IdRoomReservation = IdRoomReservation;
@@ -22,6 +25,22 @@ public class Rating implements Serializable{
         this.IdRoomReservation = IdRoomReservation;
         this.ratingStar = ratingStar;
 
+    }
+
+    public Rating(int IdRating, float ratingStar, String time, String opinion, String review,
+                  int IdRoomReservation, String Name) {
+        this.IdRating = IdRating;
+        this.ratingStar = ratingStar;
+        this.time = time;
+        this.opinion = opinion;
+        this.review = review;
+        this.IdRoomReservation = IdRoomReservation;
+        this.Name = Name;
+    }
+
+    public Rating (int IdRoomReservation, String review){
+        this.review = review;
+        this.IdRoomReservation = IdRoomReservation;
     }
 
     public int getIdRating() {
@@ -62,5 +81,21 @@ public class Rating implements Serializable{
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
     }
 }

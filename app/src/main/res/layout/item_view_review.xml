@@ -12,16 +12,26 @@
     card_view:cardElevation="6dp">
 
     <RelativeLayout
-        android:id="@+id/layout"
+        android:id="@+id/rlReview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_rating">
+
+        <TextView
+            android:id="@+id/tvRatingName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:text="顧客姓名"/>
+
         <TextView
             android:id="@+id/ratingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="10dp"
+            android:layout_below="@+id/tvRatingName"
             android:text="訂單編號"
             android:textColor="#000000"
             android:textSize="10sp" />
@@ -32,6 +42,7 @@
             android:layout_toEndOf="@id/ratingText"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
+            android:layout_below="@+id/tvRatingName"
             android:text="IdRoomReservation"
             android:textColor="#000000"
             android:textSize="10sp" />
@@ -71,12 +82,12 @@
                 >
 
 
-                <TextView
-                android:id="@+id/tvRatingReview"
-                android:layout_width="wrap_content"
+                <EditText
+                android:id="@+id/etRatingReview"
+                android:layout_width="5000dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="90dp"
-                android:text="Review"
+                android:hint="Review"
                 android:layout_marginBottom="20dp"
                 android:textColor="#555555" />
 
@@ -88,6 +99,15 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/delete128"/>
+
+                <Button
+                    android:id="@+id/btReviewOK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ibDelete"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentRight="true"
+                    android:text="確認回覆"/>
 
              </RelativeLayout>
         </LinearLayout>

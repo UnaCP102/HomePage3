@@ -37,6 +37,8 @@
     <string name="msg_UpdateSuccess">Update Success</string>
     <string name="customer">Customer</string>
     <string name="employee">Employee</string>
+    <string name="msg_DeleteFail">Delete Fail</string>
+    <string name="msg_DeleteSuccess">Delete Success</string>
 
     <array name="home_video_tab">
     <item>全部@dream@0</item>

@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 
 public class RatingActivity extends AppCompatActivity{
     final static String TAG = "CommentActivity";
@@ -60,12 +63,18 @@ public class RatingActivity extends AppCompatActivity{
                     return;
                 }
 
+                //獲得點擊確認後之時間
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = new Date(System.currentTimeMillis());
+                String time = dateFormat.format(date);
+
                 Float ratingStar = ratingBar.getRating();
                 String opinion = etOpinion.getText().toString();
 
+
                 if (Common.networkConnected(RatingActivity.this)){
                     String url = Common.URL +  "/RatingServlet";
-                    Rating comment = new Rating(0, ratingStar, opinion, "", 7);
+                    Rating comment = new Rating(0, ratingStar, time, opinion, "", 1);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "ratingInsert");
                     jsonObject.addProperty("rating", new Gson().toJson(comment));

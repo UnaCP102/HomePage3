@@ -42,7 +42,7 @@ public class HomePageFragment extends Fragment {
         btToJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), JoinActivity.class);
+                Intent intent = new Intent(getActivity(), AllRatingActivity.class);
                 startActivity(intent);
             }
         });
@@ -50,8 +50,8 @@ public class HomePageFragment extends Fragment {
         btToLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivityForResult(intent, FUNC_LOGIN);
+                Intent intent = new Intent(getActivity(), RatingReviewActivity.class);
+                startActivity(intent);
             }
         });
 

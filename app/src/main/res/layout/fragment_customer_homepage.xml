@@ -53,12 +53,12 @@
         android:id="@+id/btToJoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="加入會員"/>
+        android:text="評論總覽"/>
 
     <Button
         android:id="@+id/btToLogIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="登入頁面"/>
+        android:text="員工回覆評論"/>
 
 </LinearLayout>
